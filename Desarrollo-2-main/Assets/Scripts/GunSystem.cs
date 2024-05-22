@@ -4,6 +4,7 @@ using TMPro;
 public class GunSystem : MonoBehaviour
 {
     [SerializeField] GameObject shootingCamera;
+    [SerializeField] Transform pivot;
 
     public int damage;
     public float timeBetweenShooting;
@@ -80,9 +81,9 @@ public class GunSystem : MonoBehaviour
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
 
-        direction = (scope.transform.forward - (shootingCamera.transform.position - scope.transform.position));
+        direction = pivot.forward;
 
-        if (Physics.Raycast(scope.transform.position, direction, out rayHit, range))
+        if (Physics.Raycast(pivot.position, direction, out rayHit, range))
         {
             if (rayHit.collider.CompareTag("Enemy"))
             {
