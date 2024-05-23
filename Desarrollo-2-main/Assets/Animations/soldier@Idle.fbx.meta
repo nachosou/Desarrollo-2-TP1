@@ -1,69 +1,9 @@
 fileFormatVersion: 2
-guid: c07dfc10d12be5a48bac21dc1af3e2cb
+guid: 677b5e3844a0c014eaaea7c2f173b1e0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ch44_Body
-    second: {fileID: 2100000, guid: 82f620febe3f40e41b547344749d3dac, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ch44_body1
-    second: {fileID: 2100000, guid: 0e70e392f94e7e041a95a285a43aa526, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1001_Diffuse
-    second: {fileID: 2800000, guid: 48bd8ecf2d1245343af03c9d1f36ca13, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1001_Emissive
-    second: {fileID: 2800000, guid: 7dc518d57ba812d41b6a225f2e7b253f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1001_Glossiness
-    second: {fileID: 2800000, guid: 651dbf0920ebb0a45b9091fde44a873a, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1001_Normal
-    second: {fileID: 2800000, guid: f5f22e182266b8f4999ca096f017ff73, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1001_Specular
-    second: {fileID: 2800000, guid: bc3dccf23a751984998ed986411da5bb, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1002_Diffuse
-    second: {fileID: 2800000, guid: c275e656b0604c649986c7ddff3988d6, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1002_Emissive
-    second: {fileID: 2800000, guid: 24460108b1450c84b9b5774ffa545bdd, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1002_Glossiness
-    second: {fileID: 2800000, guid: 05df8bb297567eb4dbaf897182c33f0b, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1002_Normal
-    second: {fileID: 2800000, guid: 134c76a41a1bb51498eb65feb0d10957, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Ch44_1002_Specular
-    second: {fileID: 2800000, guid: 7d54c4ca71a827346b60e7854fc43881, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -93,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: running
+      name: Idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 59
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -131,7 +71,7 @@ ModelImporter:
     sortHierarchyByName: 0
     importPhysicalCameras: 1
     importVisibility: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     importCameras: 0
     importLights: 0
     nodeNameCollisionStrategy: 1
@@ -166,9 +106,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 677b5e3844a0c014eaaea7c2f173b1e0
-  - 9f6e6bdfc2693e749b3d6c3dc47b2503
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -937,13 +875,13 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c07dfc10d12be5a48bac21dc1af3e2cb, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 0
+  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

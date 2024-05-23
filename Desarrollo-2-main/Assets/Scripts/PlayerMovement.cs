@@ -16,12 +16,11 @@ public class PlayerMovement : MonoBehaviour
     bool isMoving;
 
     public Transform orientation;
-
     Vector3 moveDirection;
-
     Rigidbody rb;
-
     Vector2 speed;
+
+    [SerializeField] Animator animator;
 
     private void Awake()
     {
@@ -59,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (grounded)
             {
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);  
             }
         }
     }
@@ -72,10 +71,11 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer(InputAction.CallbackContext context)
     {
         Vector2 move = context.ReadValue<Vector2>();
-        Debug.Log(move.magnitude);
 
         isMoving = (move.magnitude > 0.5f);
         speed = isMoving ? move:Vector2.zero;
+
+        animator.SetBool("isRunning", isMoving);
     }
 
     private void SpeedControl()
