@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         if(isMoving)
         {
             moveDirection = orientation.forward * speed.y + orientation.right * speed.x;
-            Debug.Log(moveDirection);
 
             if (grounded)
             {
