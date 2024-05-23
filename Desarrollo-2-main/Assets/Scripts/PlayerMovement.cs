@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-
     public float groundDrag;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
+    public InputActionReference move;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -20,16 +19,18 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
-    float horizontalInput;
-    float verticalInput;
-
     Vector3 moveDirection;
 
     Rigidbody rb;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        move = GetComponent<InputActionReference>();
+    }
+
+    private void Start()
+    {
         rb.freezeRotation = true;
     }
 
@@ -37,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        MyInput();
         SpeedControl();
 
         if(grounded)
@@ -55,17 +55,13 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
     }
 
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-    }
-
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = orientation.forward * move.action.ReadValue<Vector2>().y + orientation.right * move.action.ReadValue<Vector2>().x;
 
-        if(grounded)
+        Debug.Log(moveDirection);
+
+        if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }

@@ -1,0 +1,150 @@
+{
+    "name": "Player controls",
+    "maps": [
+        {
+            "name": "GamePlay",
+            "id": "9776cd8d-c1d7-4df2-a4bb-5e4471b65ce1",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "64610980-1f28-4ca4-a64b-a1f0785295f9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Scope",
+                    "type": "Button",
+                    "id": "3c86a1e0-e057-4f3b-af3d-c9a8e82b57b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "PassThrough",
+                    "id": "000be8b4-4f5d-421e-871c-7b7ef22cd77a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HoldShooting",
+                    "type": "Button",
+                    "id": "f91bf697-edc4-4f55-bf8a-96ef42b0a56d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "82fdf8b7-901c-4e5b-a865-a3fa6cff145e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "a15f3bbd-8ddc-4a79-abb6-a51eefa4018f",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Up",
+                    "id": "f0bfb66e-8130-4ee7-bb7d-4b0e56e1a208",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "6a7e1cc3-d113-41ac-a80d-6eb82f89a944",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "d4917c2f-459d-4937-9929-2df89265d75c",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "3005d683-4812-40ad-bec2-0173e5f56348",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f9b86f05-63be-4658-b7f7-f4aca3e057b6",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold(duration=0.1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scope",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b5bd273-4e03-47e2-bb65-36a7f3ac9fe4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=0.4)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldShooting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

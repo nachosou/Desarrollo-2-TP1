@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GunSystem : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GunSystem : MonoBehaviour
     public int magazineSize;
     public int bulletsPerTap;
     public bool allowButtonHold;
+    //public InputActionReference shoot;
 
     int bulletsLeft;
     int bulletsShot;
@@ -43,12 +45,12 @@ public class GunSystem : MonoBehaviour
 
     private void Update()
     {
-        MyInput();
+        CheckShoot();
 
         bulletsMagazine.text = (bulletsLeft + " / " + magazineSize);
     }
 
-    private void MyInput()
+    private void CheckShoot()
     {
         if (IsShootingCameraActive())
         {
@@ -74,7 +76,7 @@ public class GunSystem : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         readyToShoot = false;
 
@@ -124,7 +126,7 @@ public class GunSystem : MonoBehaviour
         reloading = false;
     }
 
-    private bool IsShootingCameraActive()
+    public bool IsShootingCameraActive()
     {
         if(shootingCamera.activeInHierarchy)
         {
