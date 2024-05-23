@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,12 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float groundDrag;
 
-    public InputActionReference move;
+    public Playercontrols input;
 
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
     bool grounded;
+    bool isMoving;
 
     public Transform orientation;
 
@@ -23,15 +21,19 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    Vector2 speed;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        move = GetComponent<InputActionReference>();
+        input = new Playercontrols();   
+        input.Enable();
     }
 
     private void Start()
     {
         rb.freezeRotation = true;
+        input.GamePlay.Move.performed += MovePlayer;
     }
 
     private void Update()
@@ -49,22 +51,32 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
         }
     }
-
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
-        MovePlayer();
+        if(isMoving)
+        {
+            moveDirection = orientation.forward * speed.y + orientation.right * speed.x;
+            Debug.Log(moveDirection);
+
+            if (grounded)
+            {
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            }
+        }
     }
 
-    private void MovePlayer()
+    private void OnDestroy()
     {
-        moveDirection = orientation.forward * move.action.ReadValue<Vector2>().y + orientation.right * move.action.ReadValue<Vector2>().x;
+        input.GamePlay.Move.performed -= MovePlayer;
+    }
 
-        Debug.Log(moveDirection);
+    private void MovePlayer(InputAction.CallbackContext context)
+    {
+        Vector2 move = context.ReadValue<Vector2>();
+        Debug.Log(move.magnitude);
 
-        if (grounded)
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        }
+        isMoving = (move.magnitude > 0.5f);
+        speed = isMoving ? move:Vector2.zero;
     }
 
     private void SpeedControl()
