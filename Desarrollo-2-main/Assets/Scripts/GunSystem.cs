@@ -16,7 +16,6 @@ public class GunSystem : MonoBehaviour
     public int magazineSize;
     public int bulletsPerTap;
     public bool allowButtonHold;
-    //public InputActionReference shoot;
 
     int bulletsLeft;
     int bulletsShot;
