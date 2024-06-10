@@ -56,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = orientation.forward * speed.y + orientation.right * speed.x;
 
+            Debug.Log(moveDirection);
+            Debug.Log(speed);
+
             if (grounded)
             {
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);  
