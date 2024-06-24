@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (!grounded)
             {
-                rb.AddForce(moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+                rb.AddForce(moveDirection.normalized * (moveSpeed * 5f * airMultiplier), ForceMode.Force);
             }
         }
     }
