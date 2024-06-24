@@ -74,8 +74,6 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = orientation.forward * speed.y + orientation.right * speed.x;
 
-            Debug.Log(readyToJump);
-
             if (grounded)
             {
                 rb.AddForce(moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);  
