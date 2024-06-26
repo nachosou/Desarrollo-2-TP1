@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 speed;
 
     [SerializeField] Animator animator;
+    [SerializeField] AnimationHandler animationHandler;
 
     private void Awake()
     {
@@ -97,7 +98,8 @@ public class PlayerMovement : MonoBehaviour
         isMoving = (move.magnitude > 0.5f);
         speed = isMoving ? move:Vector2.zero;
 
-        animator.SetBool("isRunning", isMoving);
+        //animator.SetBool("isRunning", isMoving);
+        animationHandler.ExecuteRunAnimation(isMoving);
     }
 
     private void SpeedControl()
