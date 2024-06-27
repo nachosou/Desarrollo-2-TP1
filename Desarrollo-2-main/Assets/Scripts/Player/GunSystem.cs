@@ -20,7 +20,6 @@ public class GunSystem : MonoBehaviour
     int bulletsLeft;
     int bulletsShot;
 
-    bool shooting;
     bool readyToShoot;
     bool reloading;
 
@@ -35,43 +34,44 @@ public class GunSystem : MonoBehaviour
     public GameObject blood;
 
     [SerializeField] public TextMeshProUGUI bulletsMagazine;
+    [SerializeField] PlayerInput input;
 
     private void Start()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        input.currentActionMap.FindAction("Shoot").started += GunSystem_performed;
+        input.currentActionMap.FindAction("Reload").started += GunSystem_started; 
     }
 
     private void Update()
     {
-        CheckShoot();
-
         bulletsMagazine.text = (bulletsLeft + " / " + magazineSize);
+    }
+
+    private void OnDestroy()
+    {
+        if(input.currentActionMap != null)
+        {
+            input.currentActionMap.FindAction("Shoot").started -= GunSystem_performed;
+            input.currentActionMap.FindAction("Reload").started -= GunSystem_started;
+        }
+    }
+
+    private void GunSystem_performed(InputAction.CallbackContext obj)
+    {
+        CheckShoot();
     }
 
     private void CheckShoot()
     {
         if (IsShootingCameraActive())
         {
-            if (allowButtonHold)
-            {
-                shooting = Input.GetMouseButton(0);
-            }
-            else
-            {
-                shooting = Input.GetMouseButtonDown(0);
-            }
-
-            if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+            if (readyToShoot && !reloading && bulletsLeft > 0)
             {
                 bulletsShot = bulletsPerTap;
                 Shoot();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
-        {
-            Reload();
         }
     }
 
@@ -111,6 +111,11 @@ public class GunSystem : MonoBehaviour
     private void ResetShoot()
     {
         readyToShoot = true;
+    }
+
+    private void GunSystem_started(InputAction.CallbackContext obj)
+    {
+        Reload();
     }
 
     private void Reload()

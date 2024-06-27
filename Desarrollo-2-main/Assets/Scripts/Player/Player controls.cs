@@ -62,13 +62,22 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""6bf10c97-5d57-4e6b-b24c-43c07a80bb00"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""82fdf8b7-901c-4e5b-a865-a3fa6cff145e"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -152,6 +161,17 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""action"": ""HoldShooting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d8d4940-7095-4464-87b7-5bf6403660ae"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +196,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay_Scope = m_GamePlay.FindAction("Scope", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_HoldShooting = m_GamePlay.FindAction("HoldShooting", throwIfNotFound: true);
+        m_GamePlay_Reload = m_GamePlay.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -241,6 +262,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Scope;
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_HoldShooting;
+    private readonly InputAction m_GamePlay_Reload;
     public struct GamePlayActions
     {
         private @Playercontrols m_Wrapper;
@@ -249,6 +271,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         public InputAction @Scope => m_Wrapper.m_GamePlay_Scope;
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @HoldShooting => m_Wrapper.m_GamePlay_HoldShooting;
+        public InputAction @Reload => m_Wrapper.m_GamePlay_Reload;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -270,6 +293,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @HoldShooting.started += instance.OnHoldShooting;
             @HoldShooting.performed += instance.OnHoldShooting;
             @HoldShooting.canceled += instance.OnHoldShooting;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -286,6 +312,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @HoldShooting.started -= instance.OnHoldShooting;
             @HoldShooting.performed -= instance.OnHoldShooting;
             @HoldShooting.canceled -= instance.OnHoldShooting;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -318,5 +347,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         void OnScope(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnHoldShooting(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }
