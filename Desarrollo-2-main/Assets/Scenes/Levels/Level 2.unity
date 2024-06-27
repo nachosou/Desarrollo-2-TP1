@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1509,7 +1509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585753650}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06622727, y: -9.437845e-10, z: 6.264188e-11, w: 0.9978046}
+  m_LocalRotation: {x: 0.0662273, y: 0.000000028808092, z: -0.00000000191208, w: 0.9978046}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3077,6 +3077,7 @@ GameObject:
   - component: {fileID: 1175436354}
   - component: {fileID: 1175436353}
   - component: {fileID: 1175436356}
+  - component: {fileID: 1175436357}
   - component: {fileID: 1175436355}
   m_Layer: 6
   m_Name: Player
@@ -3199,6 +3200,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 1827554691}
+--- !u!114 &1175436357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175436352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7988a7d5e420942966fbcd7060f27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   animator: {fileID: 206376199}
 --- !u!1 &1192597130
 GameObject:
@@ -4302,7 +4315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550048199}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.019778196, y: 0.0000000018622807, z: -3.6839757e-11, w: 0.99980444}
+  m_LocalRotation: {x: 0.019778196, y: 0.0000000018622809, z: -3.683976e-11, w: 0.99980444}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

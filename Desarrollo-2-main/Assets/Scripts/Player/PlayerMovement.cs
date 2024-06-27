@@ -28,12 +28,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     Vector2 speed;
 
-    [SerializeField] Animator animator;
-    [SerializeField] AnimationHandler animationHandler;
+    AnimationHandler animationHandler;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animationHandler = GetComponent<AnimationHandler>();
         input = new Playercontrols();   
         input.Enable();
     }
@@ -98,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
         isMoving = (move.magnitude > 0.5f);
         speed = isMoving ? move:Vector2.zero;
 
-        //animator.SetBool("isRunning", isMoving);
         animationHandler.ExecuteRunAnimation(isMoving);
     }
 

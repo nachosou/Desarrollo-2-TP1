@@ -3799,6 +3799,7 @@ GameObject:
   - component: {fileID: 1550934455}
   - component: {fileID: 1550934454}
   - component: {fileID: 1550934457}
+  - component: {fileID: 1550934458}
   - component: {fileID: 1550934456}
   m_Layer: 6
   m_Name: Player
@@ -3912,11 +3913,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   groundDrag: 5
+  jumpForce: 0
+  jumpCoolDown: 0
+  airMultiplier: 0
+  jumpKey: 32
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 1567454886}
+--- !u!114 &1550934458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550934453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7988a7d5e420942966fbcd7060f27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   animator: {fileID: 279349593}
 --- !u!1 &1564148927
 GameObject:
