@@ -8,4 +8,9 @@ public class AnimationHandler : MonoBehaviour
     {
         animator.SetBool("isRunning", isMoving);
     }
+
+    public void ExecuteAmingAnimation(bool isAming)
+    {
+        animator.SetBool("isAming", isAming);
+    }
 }

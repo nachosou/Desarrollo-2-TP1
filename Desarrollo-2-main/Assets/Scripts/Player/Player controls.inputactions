@@ -64,6 +64,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "905fb0df-9e3a-4a11-bfd6-7bc3addaab54",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "a15f3bbd-8ddc-4a79-abb6-a51eefa4018f",
                     "path": "2DVector",

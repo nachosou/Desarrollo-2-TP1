@@ -17,6 +17,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private CameraStyle currentStyle;
 
+    bool isAming;
+    AnimationHandler animationHandler;
+
     private enum CameraStyle
     {
         Basic,
@@ -27,6 +30,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
+        animationHandler = player.GetComponent<AnimationHandler>();
     }
 
     private void Update()
@@ -34,10 +38,12 @@ public class ThirdPersonCamera : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             SwitchCameraStyle(CameraStyle.Combat);
+            isAming = true;
         }
         else
         {
             SwitchCameraStyle(CameraStyle.Basic);
+            isAming = false;
         }
 
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
@@ -49,7 +55,22 @@ public class ThirdPersonCamera : MonoBehaviour
         playerObj.forward = dirToCombatLookAt.normalized;
 
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
+
+        animationHandler.ExecuteAmingAnimation(isAming);
+        Debug.Log(isAming);
     }
+
+    //private void InputCameraStyle()
+    //{
+    //    if (Input.GetMouseButton(1))
+    //    {
+    //        SwitchCameraStyle(CameraStyle.Combat);
+    //    }
+    //    else
+    //    {
+    //        SwitchCameraStyle(CameraStyle.Basic);
+    //    }
+    //}
 
     private void SwitchCameraStyle(CameraStyle newStyle)
     {
