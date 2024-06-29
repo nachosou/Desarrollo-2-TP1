@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     bool grounded;
     bool isMoving;
     bool isJumping;
+    bool isFalling;
 
     public Transform orientation;
     Vector3 moveDirection;
@@ -59,6 +60,15 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.drag = 0;
+        }
+
+        if(!grounded) 
+        {
+            animationHandler.SetFallingBoolAnimation(!isFalling);
+        }
+        else
+        {
+            animationHandler.SetFallingBoolAnimation(isFalling);
         }
 
         if(Input.GetKey(jumpKey) && readyToJump && grounded) 
@@ -127,8 +137,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        
-
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);

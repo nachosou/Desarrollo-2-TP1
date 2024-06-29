@@ -19,8 +19,8 @@ public class AnimationHandler : MonoBehaviour
         animator.SetBool("isJumping", isJumping);
     }
 
-    //public void ExecuteRunningJumpAnimation(bool isJumping)
-    //{
-    //    animator.SetBool("isJumping", isJumping);
-    //}
+    public void SetFallingBoolAnimation(bool isFalling)
+    {
+        animator.SetBool("isFalling", isFalling);
+    }
 }
