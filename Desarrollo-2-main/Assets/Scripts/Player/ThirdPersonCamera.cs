@@ -63,14 +63,14 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void ShootingCamera_started(InputAction.CallbackContext obj)
     {
-        SwitchCameraStyle(CameraStyle.Combat);
         isAming = true;
+        SwitchCameraStyle(CameraStyle.Combat);
     }
 
     private void ShootingCamera_canceled(InputAction.CallbackContext obj)
     {
-        SwitchCameraStyle(CameraStyle.Basic);
         isAming = false;
+        SwitchCameraStyle(CameraStyle.Basic); 
     }
 
     private void SwitchCameraStyle(CameraStyle newStyle)

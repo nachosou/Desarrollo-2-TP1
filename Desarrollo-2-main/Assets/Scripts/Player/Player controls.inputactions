@@ -54,22 +54,22 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "82fdf8b7-901c-4e5b-a865-a3fa6cff145e",
-                    "path": "<Keyboard>/q",
+                    "id": "905fb0df-9e3a-4a11-bfd6-7bc3addaab54",
+                    "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "905fb0df-9e3a-4a11-bfd6-7bc3addaab54",
-                    "path": "<Joystick>/trigger",
+                    "id": "b40983e7-25e7-4452-93cf-9f29dfbe8293",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -131,11 +131,11 @@
                 },
                 {
                     "name": "",
-                    "id": "f9b86f05-63be-4658-b7f7-f4aca3e057b6",
-                    "path": "<Keyboard>/f",
-                    "interactions": "Hold(duration=0.1)",
+                    "id": "a84ed342-1d13-484d-9bd5-699c3b025813",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -172,6 +172,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }

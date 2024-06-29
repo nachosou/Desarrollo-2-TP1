@@ -65,8 +65,19 @@ public class PlayerMovement : MonoBehaviour
         { 
             readyToJump = false;
 
-            Jump();
+            isJumping = true;
 
+            animationHandler.SetJumpBoolAnimation(isJumping);
+
+            if (isMoving) 
+            {
+                Jump();            
+            }
+            else
+            {
+                Invoke(nameof(Jump), 0.3f);
+            }
+            
             Invoke(nameof(ResetJump), jumpCoolDown);
         }
     }
@@ -116,9 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        isJumping = true;
-
-        animationHandler.SetJumpBoolAnimation(isJumping);
+        
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
