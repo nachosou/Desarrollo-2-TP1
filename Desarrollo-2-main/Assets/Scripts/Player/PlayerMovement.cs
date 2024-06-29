@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool grounded;
     bool isMoving;
+    bool isJumping;
 
     public Transform orientation;
     Vector3 moveDirection;
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCoolDown);
         }
     }
+
     private void FixedUpdate()
     {
         if(isMoving)
@@ -98,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         isMoving = (move.magnitude > 0.5f);
         speed = isMoving ? move:Vector2.zero;
 
-        animationHandler.ExecuteRunAnimation(isMoving);
+        animationHandler.SetRunBoolAnimation(isMoving);
     }
 
     private void SpeedControl()
@@ -114,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        isJumping = true;
+
+        animationHandler.SetJumpBoolAnimation(isJumping);
+
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -122,5 +128,9 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+
+        isJumping = false;
+
+        animationHandler.SetJumpBoolAnimation(isJumping);
     }
 }

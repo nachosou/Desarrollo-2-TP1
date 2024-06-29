@@ -56,8 +56,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
 
-        animationHandler.ExecuteAmingAnimation(isAming);
-        Debug.Log(isAming);
+        animationHandler.SetAmingBoolAnimation(isAming);
     }
 
     //private void InputCameraStyle()
