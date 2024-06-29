@@ -12,6 +12,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public float rotationSpeed;
 
     public Transform combatLookAt;
+    [SerializeField] GameObject crossHair;
 
     public GameObject basicCam;
     public GameObject shootCam;
@@ -77,6 +78,7 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             basicCam.SetActive(true);
             shootCam.SetActive(false);
+            crossHair.SetActive(false);
             isAming = false;
         }
 
@@ -84,6 +86,7 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             shootCam.SetActive(true);
             basicCam.SetActive(false);
+            crossHair.SetActive(true);
             isAming = true;
         }
 
