@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     bool isAming;
     AnimationHandler animationHandler;
+    [SerializeField] PlayerInput input;
 
     private enum CameraStyle
     {
@@ -31,21 +33,12 @@ public class ThirdPersonCamera : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
         animationHandler = player.GetComponent<AnimationHandler>();
+        input.currentActionMap.FindAction("Aim").started += ShootingCamera_started; 
+        input.currentActionMap.FindAction("Aim").canceled += ShootingCamera_canceled; 
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(1))
-        {
-            SwitchCameraStyle(CameraStyle.Combat);
-            isAming = true;
-        }
-        else
-        {
-            SwitchCameraStyle(CameraStyle.Basic);
-            isAming = false;
-        }
-
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
@@ -59,17 +52,26 @@ public class ThirdPersonCamera : MonoBehaviour
         animationHandler.SetAmingBoolAnimation(isAming);
     }
 
-    //private void InputCameraStyle()
-    //{
-    //    if (Input.GetMouseButton(1))
-    //    {
-    //        SwitchCameraStyle(CameraStyle.Combat);
-    //    }
-    //    else
-    //    {
-    //        SwitchCameraStyle(CameraStyle.Basic);
-    //    }
-    //}
+    private void OnDestroy()
+    {
+        if (input.currentActionMap != null)
+        {
+            input.currentActionMap.FindAction("Aim").started -= ShootingCamera_started;
+            input.currentActionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;
+        }
+    }
+
+    private void ShootingCamera_started(InputAction.CallbackContext obj)
+    {
+        SwitchCameraStyle(CameraStyle.Combat);
+        isAming = true;
+    }
+
+    private void ShootingCamera_canceled(InputAction.CallbackContext obj)
+    {
+        SwitchCameraStyle(CameraStyle.Basic);
+        isAming = false;
+    }
 
     private void SwitchCameraStyle(CameraStyle newStyle)
     {

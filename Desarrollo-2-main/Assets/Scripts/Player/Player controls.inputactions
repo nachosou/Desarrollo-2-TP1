@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Scope",
+                    "name": "Aim",
                     "type": "Button",
                     "id": "3c86a1e0-e057-4f3b-af3d-c9a8e82b57b0",
                     "expectedControlType": "Button",
@@ -132,11 +132,11 @@
                 {
                     "name": "",
                     "id": "f9b86f05-63be-4658-b7f7-f4aca3e057b6",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/f",
                     "interactions": "Hold(duration=0.1)",
                     "processors": "",
                     "groups": "",
-                    "action": "Scope",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

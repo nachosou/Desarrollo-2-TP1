@@ -37,7 +37,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Scope"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
                     ""id"": ""3c86a1e0-e057-4f3b-af3d-c9a8e82b57b0"",
                     ""expectedControlType"": ""Button"",
@@ -154,11 +154,11 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f9b86f05-63be-4658-b7f7-f4aca3e057b6"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": ""Hold(duration=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Scope"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -204,7 +204,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Shoot = m_GamePlay.FindAction("Shoot", throwIfNotFound: true);
-        m_GamePlay_Scope = m_GamePlay.FindAction("Scope", throwIfNotFound: true);
+        m_GamePlay_Aim = m_GamePlay.FindAction("Aim", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_HoldShooting = m_GamePlay.FindAction("HoldShooting", throwIfNotFound: true);
         m_GamePlay_Reload = m_GamePlay.FindAction("Reload", throwIfNotFound: true);
@@ -270,7 +270,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Shoot;
-    private readonly InputAction m_GamePlay_Scope;
+    private readonly InputAction m_GamePlay_Aim;
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_HoldShooting;
     private readonly InputAction m_GamePlay_Reload;
@@ -279,7 +279,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         private @Playercontrols m_Wrapper;
         public GamePlayActions(@Playercontrols wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_GamePlay_Shoot;
-        public InputAction @Scope => m_Wrapper.m_GamePlay_Scope;
+        public InputAction @Aim => m_Wrapper.m_GamePlay_Aim;
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @HoldShooting => m_Wrapper.m_GamePlay_HoldShooting;
         public InputAction @Reload => m_Wrapper.m_GamePlay_Reload;
@@ -295,9 +295,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @Scope.started += instance.OnScope;
-            @Scope.performed += instance.OnScope;
-            @Scope.canceled += instance.OnScope;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -314,9 +314,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @Scope.started -= instance.OnScope;
-            @Scope.performed -= instance.OnScope;
-            @Scope.canceled -= instance.OnScope;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
@@ -355,7 +355,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     public interface IGamePlayActions
     {
         void OnShoot(InputAction.CallbackContext context);
-        void OnScope(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnHoldShooting(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
