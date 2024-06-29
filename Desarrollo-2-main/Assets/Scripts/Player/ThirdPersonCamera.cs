@@ -49,7 +49,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
 
-        animationHandler.SetAmingBoolAnimation(isAming);
+        
     }
 
     private void OnDestroy()
@@ -63,13 +63,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void ShootingCamera_started(InputAction.CallbackContext obj)
     {
-        isAming = true;
         SwitchCameraStyle(CameraStyle.Combat);
     }
 
     private void ShootingCamera_canceled(InputAction.CallbackContext obj)
     {
-        isAming = false;
         SwitchCameraStyle(CameraStyle.Basic); 
     }
 
@@ -79,13 +77,17 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             basicCam.SetActive(true);
             shootCam.SetActive(false);
+            isAming = false;
         }
 
         if (newStyle == CameraStyle.Combat)
         {
             shootCam.SetActive(true);
             basicCam.SetActive(false);
+            isAming = true;
         }
+
+        animationHandler.SetAmingBoolAnimation(isAming);
 
         currentStyle = newStyle;
     }
