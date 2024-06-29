@@ -35,6 +35,8 @@ public class GunSystem : MonoBehaviour
 
     [SerializeField] public TextMeshProUGUI bulletsMagazine;
     [SerializeField] PlayerInput input;
+    [SerializeField] GameObject shootPivot;
+    [SerializeField] LineRenderer lineRenderer;
 
     private void Start()
     {
@@ -79,6 +81,8 @@ public class GunSystem : MonoBehaviour
     {
         readyToShoot = false;
 
+        lineRenderer.SetPosition(0, shootPivot.transform.position);
+
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
 
@@ -86,10 +90,14 @@ public class GunSystem : MonoBehaviour
 
         if (Physics.Raycast(pivot.position, direction, out rayHit, range))
         {
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(1, rayHit.point);
+
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 rayHit.collider.GetComponent<Enemy>().TakeDamage(damage);
-                Instantiate(blood, rayHit.point, Quaternion.Euler(0, 180, 0));
+                var newBlood = Instantiate(blood, rayHit.point, Quaternion.identity);
+                newBlood.transform.forward = rayHit.normal;
             }
             else
             {
@@ -111,6 +119,7 @@ public class GunSystem : MonoBehaviour
     private void ResetShoot()
     {
         readyToShoot = true;
+        lineRenderer.enabled = false;
     }
 
     private void GunSystem_started(InputAction.CallbackContext obj)

@@ -49,8 +49,6 @@ public class ThirdPersonCamera : MonoBehaviour
         playerObj.forward = dirToCombatLookAt.normalized;
 
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
-
-        
     }
 
     private void OnDestroy()
