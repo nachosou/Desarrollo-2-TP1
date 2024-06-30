@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     Vector2 speed;
 
+    public ProjectilesSO projectileData;
+    private ProjectilesFactory projectileFactory;
+
     AnimationHandler animationHandler;
 
     private void Awake()
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         animationHandler = GetComponent<AnimationHandler>();
         input = new Playercontrols();   
         input.Enable();
+        projectileFactory = new ProjectilesFactory(projectileData);
     }
 
     private void Start()
@@ -49,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            FireProjectile();
+        }
+
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         SpeedControl();
@@ -122,6 +131,13 @@ public class PlayerMovement : MonoBehaviour
         speed = isMoving ? move:Vector2.zero;
 
         animationHandler.SetRunBoolAnimation(isMoving);
+    }
+
+    private void FireProjectile()
+    {
+        Vector3 position = transform.position + transform.forward;
+        Quaternion rotation = transform.rotation;
+        projectileFactory.CreateProjectile(position, rotation);
     }
 
     private void SpeedControl()
