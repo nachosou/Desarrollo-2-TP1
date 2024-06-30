@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class ProjectilesFactory 
+public class ProjectilesFactory
 {
-    private ProjectilesSO projectileData;
+    private ProjectilesSO projectileSO;
 
     public ProjectilesFactory(ProjectilesSO data)
     {
-        projectileData = data;
+        projectileSO = data;
     }
 
     /// <summary>
@@ -14,9 +14,8 @@ public class ProjectilesFactory
     /// </summary>
     public Projectile CreateProjectile(Vector3 position, Quaternion rotation)
     {
-        GameObject projectileObject = GameObject.Instantiate(projectileData.projectilePrefab, position, rotation);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.speed = projectileData.speed;
+        Projectile projectile = GameObject.Instantiate(projectileSO.projectilePrefab, position, rotation);
+        projectile.SetData(projectileSO.data);
         return projectile;
     }
 }

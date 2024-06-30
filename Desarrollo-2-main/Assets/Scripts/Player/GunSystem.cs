@@ -33,7 +33,7 @@ public class GunSystem : MonoBehaviour
     public GameObject bulletHole;
     public GameObject blood;
 
-    public ProjectilesSO projectileData;
+    public ProjectilesSO projectileSO;
     private ProjectilesFactory projectileFactory;
     public float projectileCooldown;
     private float lastFireTime;
@@ -50,7 +50,7 @@ public class GunSystem : MonoBehaviour
         input.currentActionMap.FindAction("Shoot").started += GunSystem_performed;
         input.currentActionMap.FindAction("Reload").started += GunSystem_started;
         input.currentActionMap.FindAction("ThrowProjectile").started += GunSystem_initiate;
-        projectileFactory = new ProjectilesFactory(projectileData);
+        projectileFactory = new ProjectilesFactory(projectileSO);
         lastFireTime = -projectileCooldown;
     }
 
@@ -121,8 +121,9 @@ public class GunSystem : MonoBehaviour
 
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-            Vector3 force = transform.forward * projectileData.speed + Vector3.up * (projectileData.speed / 1.2f);
+            Vector3 force = transform.forward * projectileSO.data.speed + Vector3.up * (projectileSO.data.speed / 1.2f);
             rb.AddForce(force, ForceMode.VelocityChange);
+            rb.AddTorque(rb.transform.right * 20f);
 
             lastFireTime = Time.time;
         }
@@ -147,9 +148,10 @@ public class GunSystem : MonoBehaviour
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(1, rayHit.point);
 
-            if (rayHit.collider.CompareTag("Enemy"))
+            HealthSystem health = rayHit.collider.GetComponent<HealthSystem>();
+            if (health != null)
             {
-                rayHit.collider.GetComponent<Enemy>().TakeDamage(damage);
+                health.TakeDamage(damage);
                 var newBlood = Instantiate(blood, rayHit.point, Quaternion.identity);
                 newBlood.transform.forward = rayHit.normal;
             }

@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 2438855084885942603}
   - component: {fileID: -4368429166942397882}
   - component: {fileID: 2037263055750411022}
+  - component: {fileID: 8472805540256999065}
   m_Layer: 0
   m_Name: JumpingEnemy
   m_TagString: Enemy
@@ -384,10 +385,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0
-  blood: {fileID: 198000014159833656, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c, type: 3}
   jumpForce: 7
   rb: {fileID: 2438855084885942603}
 --- !u!136 &7404976658067347982
@@ -5123,6 +5122,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8472805540256999065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7518623461438190828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768c0bfba7b869946b202c970bdd8b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 80
 --- !u!1 &8107877316867112879
 GameObject:
   m_ObjectHideFlags: 0

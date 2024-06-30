@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 8424919518651766393}
   - component: {fileID: 6409005934431944992}
   - component: {fileID: -4770732103875272240}
+  - component: {fileID: -7891047955264122714}
   m_Layer: 0
   m_Name: StaticEnemy
   m_TagString: Enemy
@@ -279,7 +280,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  health: 60
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0
 --- !u!136 &8424919518651766393
@@ -4988,6 +4988,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &-7891047955264122714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3434985373430585316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768c0bfba7b869946b202c970bdd8b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 60
 --- !u!1 &3873733196285314188
 GameObject:
   m_ObjectHideFlags: 0

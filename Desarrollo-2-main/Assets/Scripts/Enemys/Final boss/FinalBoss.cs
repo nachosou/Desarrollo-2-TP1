@@ -8,14 +8,14 @@ public class FinalBoss : Enemy
     public float teleportRange;
     public float shootingRange;
     public float shootingCooldown;
-    public float projectileSpeed;
+    public float damage;
 
     private Vector3 initialPosition;
     private Transform player;
     private bool canTeleport = true;
     private bool canShoot = true;
 
-    public ProjectilesSO projectileData;
+    public ProjectilesSO projectileSO;
     private ProjectilesFactory projectileFactory;
 
     private void Start()
@@ -24,21 +24,7 @@ public class FinalBoss : Enemy
         initialPosition = transform.position;
         StartCoroutine(TeleportRoutine());
         StartCoroutine(ShootingCooldownRoutine());
-        projectileFactory = new ProjectilesFactory(projectileData);
-    }
-
-    private void Update()
-    {
-
-    }
-
-    private IEnumerator TeleportRoutine()
-    {
-        while (canTeleport)
-        {
-            yield return new WaitForSeconds(teleportCooldown);
-            TeleportRandomly();
-        }
+        projectileFactory = new ProjectilesFactory(projectileSO);    
     }
 
     private void TeleportRandomly()
@@ -50,27 +36,31 @@ public class FinalBoss : Enemy
         }
     }
 
+    private void ShootProjectile()
+    {
+        if (canShoot)
+        {
+            Vector3 position = transform.position + transform.forward;
+            Quaternion rotation = transform.rotation;
+            projectileFactory.CreateProjectile(position, rotation).SetTarget(player.transform);
+        }
+    }
+
+    private IEnumerator TeleportRoutine()
+    {
+        while (canTeleport)
+        {
+            yield return new WaitForSeconds(teleportCooldown);
+            TeleportRandomly();
+        }
+    }
+
     private IEnumerator ShootingCooldownRoutine()
     {
-        while(canShoot)
+        while (canShoot)
         {
             yield return new WaitForSeconds(shootingCooldown);
             ShootProjectile();
         }
-    }
-
-    private void ShootProjectile()
-    {
-        if(canShoot) 
-        {
-            Vector3 position = transform.position + transform.forward;
-            Quaternion rotation = transform.rotation;
-            Projectile projectile = projectileFactory.CreateProjectile(position, rotation);
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.velocity = (player.position - firePoint.position).normalized * projectileSpeed;
-            }
-        }       
     }
 }

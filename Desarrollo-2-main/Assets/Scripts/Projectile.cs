@@ -1,19 +1,27 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
-    public float speed;
-    public float gravity = -9.8f;
-    private Vector3 velocity;
+    protected ProjectileData projectileData;
+    protected Transform target;
 
-    private void Start()
+    public void SetData(ProjectileData projectileData)
     {
-        velocity = transform.forward * speed;
+        this.projectileData = projectileData;
     }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
+
+    protected virtual void OnUpdate() { }
 
     private void Update()
     {
-        velocity.y += gravity * Time.deltaTime;
-        transform.position += velocity * Time.deltaTime;
+        if (target != null && projectileData != null)
+        {
+            OnUpdate();
+        }
     }
 }

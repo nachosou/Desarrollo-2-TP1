@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5190980126156473894}
   - component: {fileID: 384074456514788967}
   - component: {fileID: 8343101652714079382}
+  - component: {fileID: 3078507057739522641}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -96,9 +97,21 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
+--- !u!114 &3078507057739522641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3716309305240467741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768c0bfba7b869946b202c970bdd8b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 120
 --- !u!1001 &2400899663790313585
 PrefabInstance:
   m_ObjectHideFlags: 0

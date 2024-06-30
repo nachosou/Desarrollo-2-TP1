@@ -7,8 +7,6 @@ public class Enemy : MonoBehaviour
 
     public LayerMask whatIsGround;
 
-    public float health;
-
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
@@ -35,8 +33,11 @@ public class Enemy : MonoBehaviour
 
         if (walkPointSet)
         {
-            agent.SetDestination(walkPoint);
-            timer += Time.deltaTime;
+            if (agent != null) 
+            {
+                agent.SetDestination(walkPoint);
+                timer += Time.deltaTime;
+            }          
         }
 
         Vector3 distanceToWlakPoint = transform.position - walkPoint;
@@ -71,20 +72,5 @@ public class Enemy : MonoBehaviour
         {
             walkPointSet = true;
         }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            DestroyEnemy();
-        }
-    }
-
-    protected void DestroyEnemy()
-    {
-        Destroy(gameObject, 0.5f);
     }
 }
