@@ -71,6 +71,15 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowProjectile"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c04ed4e-591f-4192-99e1-91895694d05f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,17 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13ebfc99-fd7d-4728-8b42-446e7c401221"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ThrowProjectile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -213,6 +233,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_HoldShooting = m_GamePlay.FindAction("HoldShooting", throwIfNotFound: true);
         m_GamePlay_Reload = m_GamePlay.FindAction("Reload", throwIfNotFound: true);
+        m_GamePlay_ThrowProjectile = m_GamePlay.FindAction("ThrowProjectile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,6 +300,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_HoldShooting;
     private readonly InputAction m_GamePlay_Reload;
+    private readonly InputAction m_GamePlay_ThrowProjectile;
     public struct GamePlayActions
     {
         private @Playercontrols m_Wrapper;
@@ -288,6 +310,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @HoldShooting => m_Wrapper.m_GamePlay_HoldShooting;
         public InputAction @Reload => m_Wrapper.m_GamePlay_Reload;
+        public InputAction @ThrowProjectile => m_Wrapper.m_GamePlay_ThrowProjectile;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -312,6 +335,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @ThrowProjectile.started += instance.OnThrowProjectile;
+            @ThrowProjectile.performed += instance.OnThrowProjectile;
+            @ThrowProjectile.canceled += instance.OnThrowProjectile;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -331,6 +357,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @ThrowProjectile.started -= instance.OnThrowProjectile;
+            @ThrowProjectile.performed -= instance.OnThrowProjectile;
+            @ThrowProjectile.canceled -= instance.OnThrowProjectile;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -364,5 +393,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnHoldShooting(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnThrowProjectile(InputAction.CallbackContext context);
     }
 }

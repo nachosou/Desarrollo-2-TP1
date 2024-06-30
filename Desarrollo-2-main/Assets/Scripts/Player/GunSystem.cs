@@ -49,34 +49,45 @@ public class GunSystem : MonoBehaviour
         readyToShoot = true;
         input.currentActionMap.FindAction("Shoot").started += GunSystem_performed;
         input.currentActionMap.FindAction("Reload").started += GunSystem_started;
+        input.currentActionMap.FindAction("ThrowProjectile").started += GunSystem_initiate;
         projectileFactory = new ProjectilesFactory(projectileData);
         lastFireTime = -projectileCooldown;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            FireProjectile();
-        }
+        UpdateBulletsMagazine();
+    }
 
+    /// <summary>
+    /// Updates the text displaying the number of bullets left in the magazine
+    /// </summary>
+    private void UpdateBulletsMagazine()
+    {
         bulletsMagazine.text = (bulletsLeft + " / " + magazineSize);
     }
 
     private void OnDestroy()
     {
-        if(input.currentActionMap != null)
+        if (input.currentActionMap != null)
         {
             input.currentActionMap.FindAction("Shoot").started -= GunSystem_performed;
             input.currentActionMap.FindAction("Reload").started -= GunSystem_started;
+            input.currentActionMap.FindAction("ThrowProjectile").started -= GunSystem_initiate;
         }
     }
 
+    /// <summary>
+    /// Called when the shoot input action is performed
+    /// </summary>
     private void GunSystem_performed(InputAction.CallbackContext obj)
     {
         CheckShoot();
     }
 
+    /// <summary>
+    /// Checks if the player is ready to shoot and performs the shooting action if possible
+    /// </summary>
     private void CheckShoot()
     {
         if (IsShootingCameraActive())
@@ -89,23 +100,37 @@ public class GunSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when the throwing projectile input action is performed
+    /// </summary>
+    private void GunSystem_initiate(InputAction.CallbackContext obj) 
+    {
+        FireProjectile();
+    }
+
+    /// <summary>
+    /// Fires a projectile if the cooldown period has passed
+    /// </summary>
     private void FireProjectile()
     {
         if (Time.time >= lastFireTime + projectileCooldown)
         {
             Vector3 position = transform.position + transform.forward;
-        Quaternion rotation = transform.rotation;
-        Projectile projectile = projectileFactory.CreateProjectile(position, rotation);
+            Quaternion rotation = transform.rotation;
+            Projectile projectile = projectileFactory.CreateProjectile(position, rotation);
 
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-        Vector3 force = transform.forward * projectileData.speed + Vector3.up * (projectileData.speed / 1.2f);
-        rb.AddForce(force, ForceMode.VelocityChange);
+            Vector3 force = transform.forward * projectileData.speed + Vector3.up * (projectileData.speed / 1.2f);
+            rb.AddForce(force, ForceMode.VelocityChange);
 
-        lastFireTime = Time.time;
+            lastFireTime = Time.time;
+        }
     }
-}
 
+    /// <summary>
+    /// Shoots a bullet, handling raycasting and bullet effects
+    /// </summary>
     public void Shoot()
     {
         readyToShoot = false;
@@ -133,7 +158,7 @@ public class GunSystem : MonoBehaviour
                 Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0));
             }
         }
-        
+
         bulletsLeft--;
         bulletsShot--;
 
@@ -145,38 +170,46 @@ public class GunSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the shooting ability
+    /// </summary>
     private void ResetShoot()
     {
         readyToShoot = true;
         lineRenderer.enabled = false;
     }
 
+    /// <summary>
+    /// Called when the reload input action is performed
+    /// </summary>
     private void GunSystem_started(InputAction.CallbackContext obj)
     {
         Reload();
     }
 
+    /// <summary>
+    /// Initiates the reloading process
+    /// </summary>
     private void Reload()
     {
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
     }
 
+    /// <summary>
+    /// Completes the reloading process
+    /// </summary>
     private void ReloadFinished()
     {
         bulletsLeft = magazineSize;
         reloading = false;
     }
 
+    /// <summary>
+    /// Checks if the shooting camera is active
+    /// </summary>
     public bool IsShootingCameraActive()
     {
-        if(shootingCamera.activeInHierarchy)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return shootingCamera.activeInHierarchy;
     }
 }
