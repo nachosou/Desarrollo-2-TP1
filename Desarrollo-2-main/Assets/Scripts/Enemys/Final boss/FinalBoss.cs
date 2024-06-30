@@ -27,6 +27,11 @@ public class FinalBoss : Enemy
         projectileFactory = new ProjectilesFactory(projectileSO);    
     }
 
+    private void Update()
+    {
+        transform.LookAt(player.transform.position);
+    }
+
     private void TeleportRandomly()
     {
         if (canTeleport)
