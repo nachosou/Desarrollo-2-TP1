@@ -6,124 +6,63 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float groundDrag;
-
     public float jumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
-
-    bool readyToJump;
-
     public KeyCode jumpKey = KeyCode.Space;
-
-    public Playercontrols input;
 
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
-    bool isMoving;
-    bool isJumping;
-    bool isFalling;
 
+    private bool readyToJump;
+    private bool grounded;
+    private bool isMoving;
+    private bool isJumping;
+    private bool isFalling;
+    private Vector2 direction;
+
+    [SerializeField] PlayerInput input;
+    private Rigidbody rb;
+    private AnimationHandler animationHandler;
     public Transform orientation;
-    Vector3 moveDirection;
-    Rigidbody rb;
-    Vector2 speed;
-
-    AnimationHandler animationHandler;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        animationHandler = GetComponent<AnimationHandler>();
-        input = new Playercontrols();   
-        input.Enable();
-    }
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        input.GamePlay.Move.performed += MovePlayer;
         readyToJump = true;
+        animationHandler = GetComponent<AnimationHandler>();
+        input.currentActionMap.FindAction("Jump").started += PlayerMovement_performed;
+        input.currentActionMap.FindAction("Move").started += PlayerMovement_started;
+        input.currentActionMap.FindAction("Move").canceled += PlayerMovement_canceled;
     }
 
-    private void Update()
+    /// <summary>
+    /// Called when the move input action is performed
+    /// </summary>
+    private void PlayerMovement_started(InputAction.CallbackContext obj)
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        SpeedControl();
-
-        if(grounded)
-        {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
-        }
-
-        if(!grounded) 
-        {
-            animationHandler.SetFallingBoolAnimation(!isFalling);
-        }
-        else
-        {
-            animationHandler.SetFallingBoolAnimation(isFalling);
-        }
-
-        if(Input.GetKey(jumpKey) && readyToJump && grounded) 
-        { 
-            readyToJump = false;
-
-            isJumping = true;
-
-            animationHandler.SetJumpBoolAnimation(isJumping);
-
-            if (isMoving) 
-            {
-                Jump();            
-            }
-            else
-            {
-                Invoke(nameof(Jump), 0.3f);
-            }
-            
-            Invoke(nameof(ResetJump), jumpCoolDown);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if(isMoving)
-        {
-            moveDirection = orientation.forward * speed.y + orientation.right * speed.x;
-
-            if (grounded)
-            {
-                rb.AddForce(moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);  
-            }
-            else if (!grounded)
-            {
-                rb.AddForce(moveDirection.normalized * (moveSpeed * 5f * airMultiplier), ForceMode.Force);
-            }
-        }
-    }
-
-    private void OnDestroy()
-    {
-        input.GamePlay.Move.performed -= MovePlayer;
-    }
-
-    private void MovePlayer(InputAction.CallbackContext context)
-    {
-        Vector2 move = context.ReadValue<Vector2>();
-
+        Vector2 move = obj.ReadValue<Vector2>();
         isMoving = (move.magnitude > 0.5f);
-        speed = isMoving ? move:Vector2.zero;
+        direction = isMoving ? move.normalized : Vector2.zero;
 
         animationHandler.SetRunBoolAnimation(isMoving);
     }
 
+    /// <summary>
+    /// Called when the move input action is canceled
+    /// </summary>
+    private void PlayerMovement_canceled(InputAction.CallbackContext obj)
+    {
+        direction = Vector2.zero;
+
+        animationHandler.SetRunBoolAnimation(false);
+    }
+
+    /// <summary>
+    /// Controls player speed to prevent exceeding maximum movement speed
+    /// </summary>
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -132,22 +71,97 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-        }  
+        }
     }
 
+    /// <summary>
+    /// Updates player state and applies physics calculations
+    /// </summary>
+    private void Update()
+    {
+        HandleGroundedState();
+        HandleMovement();
+    }
+
+    private void OnDestroy()
+    {
+        if (input.currentActionMap != null)
+        {
+            input.currentActionMap.FindAction("Jump").started -= PlayerMovement_performed;
+            input.currentActionMap.FindAction("Move").started -= PlayerMovement_started;
+            input.currentActionMap.FindAction("Move").canceled -= PlayerMovement_canceled;
+        }
+    }
+
+    /// <summary>
+    /// Checks and updates player's grounded state
+    /// </summary>
+    private void HandleGroundedState()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        rb.drag = grounded ? groundDrag : 0f;
+
+        animationHandler.SetFallingBoolAnimation(!grounded);
+    }
+
+    /// <summary>
+    /// Handles player movement based on current state (grounded or in air)
+    /// </summary>
+    private void HandleMovement()
+    {
+        if (isMoving)
+        {
+            Vector3 moveDirection = orientation.forward * direction.y + orientation.right * direction.x;
+
+            float forceMultiplier = grounded ? 10f : 5f * airMultiplier;
+            rb.AddForce(moveDirection.normalized * (moveSpeed * forceMultiplier), ForceMode.Force);
+        }
+    }
+
+    /// <summary>
+    /// Called when the jump input action is performed
+    /// </summary>
+    private void PlayerMovement_performed(InputAction.CallbackContext obj)
+    {
+        TryJump();
+    }
+
+    /// <summary>
+    /// Initiates a jump action if conditions are met
+    /// </summary>
+    private void TryJump()
+    {
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
+            isJumping = true;
+
+            animationHandler.SetJumpBoolAnimation(isJumping);
+
+            Invoke(nameof(Jump), isMoving ? 0f : 0.3f);
+            Invoke(nameof(ResetJump), jumpCoolDown);
+        }
+    }
+
+    /// <summary>
+    /// Performs the jump action by applying vertical force
+    /// </summary>
     private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-    }    
+    }
 
+    /// <summary>
+    /// Resets the jump state after a cooldown period
+    /// </summary>
     private void ResetJump()
     {
         readyToJump = true;
-
         isJumping = false;
 
         animationHandler.SetJumpBoolAnimation(isJumping);
     }
+
+    
 }

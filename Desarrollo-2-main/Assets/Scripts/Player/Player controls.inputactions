@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "Move",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "000be8b4-4f5d-421e-871c-7b7ef22cd77a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HoldShooting",
@@ -54,6 +54,15 @@
                     "name": "ThrowProjectile",
                     "type": "Button",
                     "id": "1c04ed4e-591f-4192-99e1-91895694d05f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "028de84b-a04c-4f58-806c-d0d95d571462",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -179,6 +188,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "ThrowProjectile",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dbdffc79-f1d2-4590-bdc3-660922182402",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

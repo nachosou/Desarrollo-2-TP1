@@ -272,17 +272,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3434985373430585316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 485ed2af5622cd2488a4f3499e49b40b, type: 3}
+  m_Script: {fileID: 11500000, guid: 455cc769ffc66c64aa013ce155fee409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  health: 120
+  health: 60
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0
-  blood: {fileID: 198000014159833656, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c, type: 3}
 --- !u!136 &8424919518651766393
 CapsuleCollider:
   m_ObjectHideFlags: 0

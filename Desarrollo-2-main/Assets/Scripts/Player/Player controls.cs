@@ -47,12 +47,12 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""000be8b4-4f5d-421e-871c-7b7ef22cd77a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""HoldShooting"",
@@ -76,6 +76,15 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""name"": ""ThrowProjectile"",
                     ""type"": ""Button"",
                     ""id"": ""1c04ed4e-591f-4192-99e1-91895694d05f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""028de84b-a04c-4f58-806c-d0d95d571462"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -203,6 +212,17 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""action"": ""ThrowProjectile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbdffc79-f1d2-4590-bdc3-660922182402"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -234,6 +254,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay_HoldShooting = m_GamePlay.FindAction("HoldShooting", throwIfNotFound: true);
         m_GamePlay_Reload = m_GamePlay.FindAction("Reload", throwIfNotFound: true);
         m_GamePlay_ThrowProjectile = m_GamePlay.FindAction("ThrowProjectile", throwIfNotFound: true);
+        m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -301,6 +322,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_HoldShooting;
     private readonly InputAction m_GamePlay_Reload;
     private readonly InputAction m_GamePlay_ThrowProjectile;
+    private readonly InputAction m_GamePlay_Jump;
     public struct GamePlayActions
     {
         private @Playercontrols m_Wrapper;
@@ -311,6 +333,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         public InputAction @HoldShooting => m_Wrapper.m_GamePlay_HoldShooting;
         public InputAction @Reload => m_Wrapper.m_GamePlay_Reload;
         public InputAction @ThrowProjectile => m_Wrapper.m_GamePlay_ThrowProjectile;
+        public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,6 +361,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @ThrowProjectile.started += instance.OnThrowProjectile;
             @ThrowProjectile.performed += instance.OnThrowProjectile;
             @ThrowProjectile.canceled += instance.OnThrowProjectile;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -360,6 +386,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @ThrowProjectile.started -= instance.OnThrowProjectile;
             @ThrowProjectile.performed -= instance.OnThrowProjectile;
             @ThrowProjectile.canceled -= instance.OnThrowProjectile;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -394,5 +423,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         void OnHoldShooting(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnThrowProjectile(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

@@ -34,11 +34,20 @@ public class ThirdPersonCamera : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
         animationHandler = player.GetComponent<AnimationHandler>();
-        input.currentActionMap.FindAction("Aim").started += ShootingCamera_started; 
-        input.currentActionMap.FindAction("Aim").canceled += ShootingCamera_canceled; 
+        input.currentActionMap.FindAction("Aim").started += ShootingCamera_started;
+        input.currentActionMap.FindAction("Aim").canceled += ShootingCamera_canceled;
     }
 
     private void Update()
+    {
+        UpdateOrientation();
+        UpdateCombatLookAt();
+    }
+
+    /// <summary>
+    /// Updates the orientation of the camera to face the player and combat look at direction
+    /// </summary>
+    private void UpdateOrientation()
     {
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
@@ -47,7 +56,13 @@ public class ThirdPersonCamera : MonoBehaviour
         orientation.forward = dirToCombatLookAt.normalized;
 
         playerObj.forward = dirToCombatLookAt.normalized;
+    }
 
+    /// <summary>
+    /// Updates the direction the combat look at object is facing
+    /// </summary>
+    private void UpdateCombatLookAt()
+    {
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
     }
 
@@ -60,16 +75,25 @@ public class ThirdPersonCamera : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the event when the aim action is started
+    /// </summary>
     private void ShootingCamera_started(InputAction.CallbackContext obj)
     {
         SwitchCameraStyle(CameraStyle.Combat);
     }
 
+    /// <summary>
+    /// Handles the event when the aim action is canceled
+    /// </summary>
     private void ShootingCamera_canceled(InputAction.CallbackContext obj)
     {
-        SwitchCameraStyle(CameraStyle.Basic); 
+        SwitchCameraStyle(CameraStyle.Basic);
     }
 
+    /// <summary>
+    /// Switches the camera style between basic and combat
+    /// </summary>
     private void SwitchCameraStyle(CameraStyle newStyle)
     {
         if (newStyle == CameraStyle.Basic)
