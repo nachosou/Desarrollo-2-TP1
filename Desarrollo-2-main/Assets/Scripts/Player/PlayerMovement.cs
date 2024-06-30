@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         animationHandler = GetComponent<AnimationHandler>();
         input.currentActionMap.FindAction("Jump").started += PlayerMovement_performed;
-        input.currentActionMap.FindAction("Move").started += PlayerMovement_started;
+        input.currentActionMap.FindAction("Move").performed += PlayerMovement_started;
         input.currentActionMap.FindAction("Move").canceled += PlayerMovement_canceled;
     }
 
@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleGroundedState();
         HandleMovement();
+        SpeedControl();
     }
 
     private void OnDestroy()
@@ -88,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if (input.currentActionMap != null)
         {
             input.currentActionMap.FindAction("Jump").started -= PlayerMovement_performed;
-            input.currentActionMap.FindAction("Move").started -= PlayerMovement_started;
+            input.currentActionMap.FindAction("Move").performed -= PlayerMovement_started;
             input.currentActionMap.FindAction("Move").canceled -= PlayerMovement_canceled;
         }
     }
@@ -163,5 +164,5 @@ public class PlayerMovement : MonoBehaviour
         animationHandler.SetJumpBoolAnimation(isJumping);
     }
 
-    
+
 }
