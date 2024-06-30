@@ -35,6 +35,8 @@ public class GunSystem : MonoBehaviour
 
     public ProjectilesSO projectileData;
     private ProjectilesFactory projectileFactory;
+    public float projectileCooldown;
+    private float lastFireTime;
 
     [SerializeField] public TextMeshProUGUI bulletsMagazine;
     [SerializeField] PlayerInput input;
@@ -48,6 +50,7 @@ public class GunSystem : MonoBehaviour
         input.currentActionMap.FindAction("Shoot").started += GunSystem_performed;
         input.currentActionMap.FindAction("Reload").started += GunSystem_started;
         projectileFactory = new ProjectilesFactory(projectileData);
+        lastFireTime = -projectileCooldown;
     }
 
     private void Update()
@@ -88,7 +91,9 @@ public class GunSystem : MonoBehaviour
 
     private void FireProjectile()
     {
-        Vector3 position = transform.position + transform.forward;
+        if (Time.time >= lastFireTime + projectileCooldown)
+        {
+            Vector3 position = transform.position + transform.forward;
         Quaternion rotation = transform.rotation;
         Projectile projectile = projectileFactory.CreateProjectile(position, rotation);
 
@@ -96,7 +101,10 @@ public class GunSystem : MonoBehaviour
 
         Vector3 force = transform.forward * projectileData.speed + Vector3.up * (projectileData.speed / 1.2f);
         rb.AddForce(force, ForceMode.VelocityChange);
+
+        lastFireTime = Time.time;
     }
+}
 
     public void Shoot()
     {
