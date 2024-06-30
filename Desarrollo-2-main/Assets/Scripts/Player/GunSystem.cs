@@ -33,6 +33,9 @@ public class GunSystem : MonoBehaviour
     public GameObject bulletHole;
     public GameObject blood;
 
+    public ProjectilesSO projectileData;
+    private ProjectilesFactory projectileFactory;
+
     [SerializeField] public TextMeshProUGUI bulletsMagazine;
     [SerializeField] PlayerInput input;
     [SerializeField] GameObject shootPivot;
@@ -43,11 +46,17 @@ public class GunSystem : MonoBehaviour
         bulletsLeft = magazineSize;
         readyToShoot = true;
         input.currentActionMap.FindAction("Shoot").started += GunSystem_performed;
-        input.currentActionMap.FindAction("Reload").started += GunSystem_started; 
+        input.currentActionMap.FindAction("Reload").started += GunSystem_started;
+        projectileFactory = new ProjectilesFactory(projectileData);
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            FireProjectile();
+        }
+
         bulletsMagazine.text = (bulletsLeft + " / " + magazineSize);
     }
 
@@ -75,6 +84,18 @@ public class GunSystem : MonoBehaviour
                 Shoot();
             }
         }
+    }
+
+    private void FireProjectile()
+    {
+        Vector3 position = transform.position + transform.forward;
+        Quaternion rotation = transform.rotation;
+        Projectile projectile = projectileFactory.CreateProjectile(position, rotation);
+
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+
+        Vector3 force = transform.forward * projectileData.speed + Vector3.up * (projectileData.speed / 1.2f);
+        rb.AddForce(force, ForceMode.VelocityChange);
     }
 
     public void Shoot()
