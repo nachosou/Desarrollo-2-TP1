@@ -75,15 +75,6 @@ public class ThirdPersonCamera : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        if (input.currentActionMap != null)
-        {
-            input.currentActionMap.FindAction("Aim").started -= ShootingCamera_started;
-            input.currentActionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;        
-        }
-    }
-
     public void DeactivateMap()
     {
         if (input.currentActionMap != null)

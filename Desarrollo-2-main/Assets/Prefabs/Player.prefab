@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 3926098840757391063}
   - component: {fileID: 3669845207983538113}
   - component: {fileID: -3957465850181121921}
+  - component: {fileID: -2589962606791411967}
   - component: {fileID: 1857645711800525600}
   - component: {fileID: 2603729120321715805}
   - component: {fileID: 718805669815896965}
@@ -172,6 +173,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGodModeActive: 0
   health: 200
+--- !u!114 &-2589962606791411967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013502801411867154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45991701482bdd8409f6407241c671b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 0}
 --- !u!114 &1857645711800525600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,10 +248,6 @@ MonoBehaviour:
     m_ActionName: GamePlay/Scope[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f91bf697-edc4-4f55-bf8a-96ef42b0a56d
-    m_ActionName: GamePlay/HoldShooting[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 6bf10c97-5d57-4e6b-b24c-43c07a80bb00
     m_ActionName: GamePlay/Reload[/Keyboard/r]
   - m_PersistentCalls:
@@ -264,6 +274,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ca163d88-4981-4f63-a48e-4adf0044b122
     m_ActionName: GamePlay/NextLevel[/Keyboard/f9]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c852dbc-6794-4177-b0a2-dff261ee022e
+    m_ActionName: GamePlay/PauseMenu[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamePlay

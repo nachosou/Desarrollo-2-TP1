@@ -46,15 +46,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HoldShooting"",
-                    ""type"": ""Button"",
-                    ""id"": ""f91bf697-edc4-4f55-bf8a-96ef42b0a56d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""6bf10c97-5d57-4e6b-b24c-43c07a80bb00"",
@@ -116,16 +107,25 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c852dbc-6794-4177-b0a2-dff261ee022e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""905fb0df-9e3a-4a11-bfd6-7bc3addaab54"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -154,12 +154,12 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2b5bd273-4e03-47e2-bb65-36a7f3ac9fe4"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Hold(duration=0.4)"",
+                    ""id"": ""7224b832-fe2b-4cbd-8136-fe4057f25429"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HoldShooting"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -169,7 +169,18 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b1b8366-e089-47f7-9076-e1cfd4f20e51"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -187,6 +198,17 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7658128c-3b5a-42c7-bbc1-5c850c95543b"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ThrowProjectile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""dbdffc79-f1d2-4590-bdc3-660922182402"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -198,11 +220,22 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""49254d93-d95e-4c05-b8f8-47d2dfa82e8a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ed3791d0-e4b0-48e8-89bd-e4056430c4f1"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -308,22 +341,11 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""31ec4dc7-4519-4e4b-ac37-129369d4cbc3"",
-                    ""path"": ""<XRController>/{Primary2DAxis}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7c702504-37c7-4c89-9348-eda5d2acb377"",
                     ""path"": ""<Joystick>/stick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Joystick"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -345,7 +367,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/f10"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""GodMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -358,6 +380,28 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70c68be4-5ccf-4df2-82cd-63579be577ec"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70de9508-1998-4bb6-8b77-0ff0a327f704"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -380,6 +424,28 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Joystick"",
+            ""bindingGroup"": ""Joystick"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Joystick>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -387,7 +453,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Shoot = m_GamePlay.FindAction("Shoot", throwIfNotFound: true);
         m_GamePlay_Aim = m_GamePlay.FindAction("Aim", throwIfNotFound: true);
-        m_GamePlay_HoldShooting = m_GamePlay.FindAction("HoldShooting", throwIfNotFound: true);
         m_GamePlay_Reload = m_GamePlay.FindAction("Reload", throwIfNotFound: true);
         m_GamePlay_ThrowProjectile = m_GamePlay.FindAction("ThrowProjectile", throwIfNotFound: true);
         m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
@@ -395,6 +460,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay_FlashMode = m_GamePlay.FindAction("FlashMode", throwIfNotFound: true);
         m_GamePlay_GodMode = m_GamePlay.FindAction("GodMode", throwIfNotFound: true);
         m_GamePlay_NextLevel = m_GamePlay.FindAction("NextLevel", throwIfNotFound: true);
+        m_GamePlay_PauseMenu = m_GamePlay.FindAction("PauseMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -458,7 +524,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Shoot;
     private readonly InputAction m_GamePlay_Aim;
-    private readonly InputAction m_GamePlay_HoldShooting;
     private readonly InputAction m_GamePlay_Reload;
     private readonly InputAction m_GamePlay_ThrowProjectile;
     private readonly InputAction m_GamePlay_Jump;
@@ -466,13 +531,13 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_FlashMode;
     private readonly InputAction m_GamePlay_GodMode;
     private readonly InputAction m_GamePlay_NextLevel;
+    private readonly InputAction m_GamePlay_PauseMenu;
     public struct GamePlayActions
     {
         private @Playercontrols m_Wrapper;
         public GamePlayActions(@Playercontrols wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_GamePlay_Shoot;
         public InputAction @Aim => m_Wrapper.m_GamePlay_Aim;
-        public InputAction @HoldShooting => m_Wrapper.m_GamePlay_HoldShooting;
         public InputAction @Reload => m_Wrapper.m_GamePlay_Reload;
         public InputAction @ThrowProjectile => m_Wrapper.m_GamePlay_ThrowProjectile;
         public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
@@ -480,6 +545,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         public InputAction @FlashMode => m_Wrapper.m_GamePlay_FlashMode;
         public InputAction @GodMode => m_Wrapper.m_GamePlay_GodMode;
         public InputAction @NextLevel => m_Wrapper.m_GamePlay_NextLevel;
+        public InputAction @PauseMenu => m_Wrapper.m_GamePlay_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -495,9 +561,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @HoldShooting.started += instance.OnHoldShooting;
-            @HoldShooting.performed += instance.OnHoldShooting;
-            @HoldShooting.canceled += instance.OnHoldShooting;
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
@@ -519,6 +582,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @NextLevel.started += instance.OnNextLevel;
             @NextLevel.performed += instance.OnNextLevel;
             @NextLevel.canceled += instance.OnNextLevel;
+            @PauseMenu.started += instance.OnPauseMenu;
+            @PauseMenu.performed += instance.OnPauseMenu;
+            @PauseMenu.canceled += instance.OnPauseMenu;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -529,9 +595,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @HoldShooting.started -= instance.OnHoldShooting;
-            @HoldShooting.performed -= instance.OnHoldShooting;
-            @HoldShooting.canceled -= instance.OnHoldShooting;
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
@@ -553,6 +616,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @NextLevel.started -= instance.OnNextLevel;
             @NextLevel.performed -= instance.OnNextLevel;
             @NextLevel.canceled -= instance.OnNextLevel;
+            @PauseMenu.started -= instance.OnPauseMenu;
+            @PauseMenu.performed -= instance.OnPauseMenu;
+            @PauseMenu.canceled -= instance.OnPauseMenu;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -579,11 +645,28 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
     }
+    private int m_JoystickSchemeIndex = -1;
+    public InputControlScheme JoystickScheme
+    {
+        get
+        {
+            if (m_JoystickSchemeIndex == -1) m_JoystickSchemeIndex = asset.FindControlSchemeIndex("Joystick");
+            return asset.controlSchemes[m_JoystickSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IGamePlayActions
     {
         void OnShoot(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-        void OnHoldShooting(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnThrowProjectile(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
@@ -591,5 +674,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         void OnFlashMode(InputAction.CallbackContext context);
         void OnGodMode(InputAction.CallbackContext context);
         void OnNextLevel(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
 }

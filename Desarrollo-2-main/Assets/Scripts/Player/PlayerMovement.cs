@@ -33,15 +33,15 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
         animationHandler = GetComponent<AnimationHandler>();
-        input.currentActionMap.FindAction("Jump").started += PlayerMovement_performed;
-        input.currentActionMap.FindAction("Move").performed += PlayerMovement_started;
+        input.currentActionMap.FindAction("Jump").started += JumpAction_started;
+        input.currentActionMap.FindAction("Move").performed += PlayerMovement_performed;
         input.currentActionMap.FindAction("Move").canceled += PlayerMovement_canceled;
     }
 
     /// <summary>
     /// Called when the move input action is performed
     /// </summary>
-    private void PlayerMovement_started(InputAction.CallbackContext obj)
+    private void PlayerMovement_performed(InputAction.CallbackContext obj)
     {
         Vector2 move = obj.ReadValue<Vector2>();
         isMoving = (move.magnitude > 0.5f);
@@ -88,8 +88,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (input.currentActionMap != null)
         {
-            input.currentActionMap.FindAction("Jump").started -= PlayerMovement_performed;
-            input.currentActionMap.FindAction("Move").performed -= PlayerMovement_started;
+            input.currentActionMap.FindAction("Jump").started -= JumpAction_started;
+            input.currentActionMap.FindAction("Move").performed -= PlayerMovement_performed;
             input.currentActionMap.FindAction("Move").canceled -= PlayerMovement_canceled;
         }
     }
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Called when the jump input action is performed
     /// </summary>
-    private void PlayerMovement_performed(InputAction.CallbackContext obj)
+    private void JumpAction_started(InputAction.CallbackContext obj)
     {
         TryJump();
     }
