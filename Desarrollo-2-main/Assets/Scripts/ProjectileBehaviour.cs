@@ -18,7 +18,7 @@ public class ProjectileBehaviour : Projectile
     {
         if (collision.transform == target)
         {
-            target.GetComponent<HealthSystem>().TakeDamage((int)projectileData.damage);
+            target.GetComponent<PlayerHealthSystem>().TakeDamage((int)projectileData.damage);
             DestroyProjectile();
         }
         else if(collision.collider.gameObject.CompareTag("Enemy"))

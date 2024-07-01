@@ -89,6 +89,33 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FlashMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d3dd352-2489-4834-ba05-f5c1dc09bcf0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GodMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ae0214f-325f-4edb-8c5b-8b54b97b287d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca163d88-4981-4f63-a48e-4adf0044b122"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,6 +327,39 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23159472-1880-43ce-a142-c1d27d570975"",
+                    ""path"": ""<Keyboard>/f11"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""FlashMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""240a3de1-5e68-486a-9576-06fe38c986c7"",
+                    ""path"": ""<Keyboard>/f10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GodMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf0a3a6c-8a0f-4b11-878e-f7f37d2d1d3f"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +392,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay_ThrowProjectile = m_GamePlay.FindAction("ThrowProjectile", throwIfNotFound: true);
         m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
+        m_GamePlay_FlashMode = m_GamePlay.FindAction("FlashMode", throwIfNotFound: true);
+        m_GamePlay_GodMode = m_GamePlay.FindAction("GodMode", throwIfNotFound: true);
+        m_GamePlay_NextLevel = m_GamePlay.FindAction("NextLevel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -400,6 +463,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_ThrowProjectile;
     private readonly InputAction m_GamePlay_Jump;
     private readonly InputAction m_GamePlay_Move;
+    private readonly InputAction m_GamePlay_FlashMode;
+    private readonly InputAction m_GamePlay_GodMode;
+    private readonly InputAction m_GamePlay_NextLevel;
     public struct GamePlayActions
     {
         private @Playercontrols m_Wrapper;
@@ -411,6 +477,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         public InputAction @ThrowProjectile => m_Wrapper.m_GamePlay_ThrowProjectile;
         public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
+        public InputAction @FlashMode => m_Wrapper.m_GamePlay_FlashMode;
+        public InputAction @GodMode => m_Wrapper.m_GamePlay_GodMode;
+        public InputAction @NextLevel => m_Wrapper.m_GamePlay_NextLevel;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -441,6 +510,15 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @FlashMode.started += instance.OnFlashMode;
+            @FlashMode.performed += instance.OnFlashMode;
+            @FlashMode.canceled += instance.OnFlashMode;
+            @GodMode.started += instance.OnGodMode;
+            @GodMode.performed += instance.OnGodMode;
+            @GodMode.canceled += instance.OnGodMode;
+            @NextLevel.started += instance.OnNextLevel;
+            @NextLevel.performed += instance.OnNextLevel;
+            @NextLevel.canceled += instance.OnNextLevel;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -466,6 +544,15 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @FlashMode.started -= instance.OnFlashMode;
+            @FlashMode.performed -= instance.OnFlashMode;
+            @FlashMode.canceled -= instance.OnFlashMode;
+            @GodMode.started -= instance.OnGodMode;
+            @GodMode.performed -= instance.OnGodMode;
+            @GodMode.canceled -= instance.OnGodMode;
+            @NextLevel.started -= instance.OnNextLevel;
+            @NextLevel.performed -= instance.OnNextLevel;
+            @NextLevel.canceled -= instance.OnNextLevel;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -501,5 +588,8 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         void OnThrowProjectile(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnFlashMode(InputAction.CallbackContext context);
+        void OnGodMode(InputAction.CallbackContext context);
+        void OnNextLevel(InputAction.CallbackContext context);
     }
 }

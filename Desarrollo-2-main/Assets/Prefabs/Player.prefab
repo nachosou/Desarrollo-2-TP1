@@ -79,8 +79,9 @@ GameObject:
   - component: {fileID: 8398179405207694242}
   - component: {fileID: 3926098840757391063}
   - component: {fileID: 3669845207983538113}
-  - component: {fileID: 3954056052591418749}
+  - component: {fileID: -3957465850181121921}
   - component: {fileID: 1857645711800525600}
+  - component: {fileID: 2603729120321715805}
   - component: {fileID: 718805669815896965}
   m_Layer: 6
   m_Name: Player
@@ -157,7 +158,7 @@ MonoBehaviour:
     m_Bits: 8
   input: {fileID: 718805669815896965}
   orientation: {fileID: 5288964988941060921}
---- !u!114 &3954056052591418749
+--- !u!114 &-3957465850181121921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,9 +167,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5013502801411867154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 768c0bfba7b869946b202c970bdd8b97, type: 3}
+  m_Script: {fileID: 11500000, guid: b8c2923f34673ed41a19551a379d096d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGodModeActive: 0
   health: 200
 --- !u!114 &1857645711800525600
 MonoBehaviour:
@@ -183,6 +185,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 450481162389433098}
+--- !u!114 &2603729120321715805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013502801411867154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f52cdde047e4954e82ec3f3f674afc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  levelController: {fileID: 0}
 --- !u!114 &718805669815896965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +252,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 466be46e-6ae4-4763-aa2b-073ebcad0031
     m_ActionName: GamePlay/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d3dd352-2489-4834-ba05-f5c1dc09bcf0
+    m_ActionName: GamePlay/FlashMode[/Keyboard/f11]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1ae0214f-325f-4edb-8c5b-8b54b97b287d
+    m_ActionName: GamePlay/GodMode[/Keyboard/f10]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca163d88-4981-4f63-a48e-4adf0044b122
+    m_ActionName: GamePlay/NextLevel[/Keyboard/f9]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamePlay

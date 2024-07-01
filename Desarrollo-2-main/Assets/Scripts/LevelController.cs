@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -31,8 +30,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    [ContextMenu("Next Level")]
-    private void AdvanceToNextLevel()
+    public void AdvanceToNextLevel()
     {
         var aux = FindObjectsOfType<ThirdPersonCamera>(); 
         foreach (var obj in aux) 

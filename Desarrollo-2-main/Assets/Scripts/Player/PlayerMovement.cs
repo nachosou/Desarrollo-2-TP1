@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isFalling;
     private Vector2 direction;
 
-    [SerializeField] PlayerInput input;
+    [SerializeField] public PlayerInput input;
     private Rigidbody rb;
     private AnimationHandler animationHandler;
     public Transform orientation;
