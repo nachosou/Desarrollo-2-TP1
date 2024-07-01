@@ -15,5 +15,5 @@ MonoBehaviour:
   projectilePrefab: {fileID: 825994363052760198, guid: 289e50df846e06e4fbf79dcfd93074f5, type: 3}
   data:
     speed: 4
-    damage: 20
+    damage: 10
     isTargetTracking: 1

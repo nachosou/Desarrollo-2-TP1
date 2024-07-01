@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ec9d5e312955842b68742781df01ee, type: 3}
   m_Name: TeleportStateSO
   m_EditorClassIdentifier: 
-  states: []
+  states:
+  - {fileID: 11400000, guid: ee5835625b2dfe74997438bcf80db4f5, type: 2}

@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 117944132}
   - component: {fileID: 117944131}
   - component: {fileID: 117944130}
+  - component: {fileID: 117944139}
   - component: {fileID: 117944135}
   - component: {fileID: 117944137}
   - component: {fileID: 117944136}
@@ -265,13 +266,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 5
-  firePoint: {fileID: 0}
-  teleportCooldown: 4
+  walkPointRange: 7
   teleportRange: 5
-  shootingRange: 10
-  shootingCooldown: 4
-  damage: 20
   projectileSO: {fileID: 11400000, guid: 18fb68a4306b7f241b98d9dad25827eb, type: 2}
 --- !u!136 &117944131
 CapsuleCollider:
@@ -436,6 +432,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &117944139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117944129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc617cf5c9a2234a8bef9a48cc99fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalBoss: {fileID: 117944130}
+  states:
+  - {fileID: 11400000, guid: ee5835625b2dfe74997438bcf80db4f5, type: 2}
+  - {fileID: 11400000, guid: 36b199c0e2c11424c8c4b344991bc246, type: 2}
+  - {fileID: 11400000, guid: f79a4562a4f52014185020677567e59f, type: 2}
 --- !u!1 &130760805 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f41d2109a0fd0a42823a3c51e26f1fb, type: 3}
@@ -6265,7 +6278,7 @@ Transform:
   m_GameObject: {fileID: 1801094448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.62, y: 0, z: -2.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6337,7 +6350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860942352}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22975291, y: 4.103813e-15, z: -9.687787e-16, w: 0.973249}
+  m_LocalRotation: {x: 0.2297529, y: -0.000000035523826, z: 0.000000008386036, w: 0.973249}
   m_LocalPosition: {x: -22.42, y: 4.99, z: -6.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7453,15 +7466,15 @@ PrefabInstance:
       objectReference: {fileID: 603707900}
     - target: {fileID: 7282976852373395374, guid: 90c5248d92e62064baad3095ae6c392e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2297529
+      value: 0.22975288
       objectReference: {fileID: 0}
     - target: {fileID: 7282976852373395374, guid: 90c5248d92e62064baad3095ae6c392e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 4.2725646e-15
+      value: -0.000000032428666
       objectReference: {fileID: 0}
     - target: {fileID: 7282976852373395374, guid: 90c5248d92e62064baad3095ae6c392e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.6836258e-15
+      value: 0.000000007655368
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7553,6 +7566,10 @@ PrefabInstance:
       propertyPath: bulletsMagazine
       value: 
       objectReference: {fileID: 2049966950}
+    - target: {fileID: 3669845207983538113, guid: 005d6f66d206f28419c9de6a1b53f6f1, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5013502801411867154, guid: 005d6f66d206f28419c9de6a1b53f6f1, type: 3}
       propertyPath: m_Name
       value: Player

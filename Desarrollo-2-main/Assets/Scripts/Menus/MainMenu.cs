@@ -1,16 +1,17 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level 1");
+        NavigationManager.Instance.UnloadScene("Menu");
+        NavigationManager.Instance.LoadScene("Level 1");
     }
 
     public void Credits()
     {
-        SceneManager.LoadScene("Credits");
+        NavigationManager.Instance.UnloadScene("Menu");
+        NavigationManager.Instance.LoadScene("Credits");
     }
 
     public void QuitGame()
