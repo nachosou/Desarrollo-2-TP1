@@ -4,15 +4,13 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent;
-
     public LayerMask whatIsGround;
-    
 
-    public Vector3 walkPoint;
-    bool walkPointSet;
+    private Vector3 walkPoint;
+    private bool walkPointSet;
     public float walkPointRange;
-    float timer;
-    bool canReachWalkPoint;
+    private float timer;
+    private bool canReachWalkPoint;
 
     private void Start()
     {
@@ -24,6 +22,9 @@ public class Enemy : MonoBehaviour
         Patroling();
     }
 
+    /// <summary>
+    /// Controls the patrolling behavior of the enemy
+    /// </summary>
     private void Patroling()
     {
         if (!walkPointSet)
@@ -34,14 +35,14 @@ public class Enemy : MonoBehaviour
 
         if (walkPointSet)
         {
-            if (agent != null) 
+            if (agent != null)
             {
                 agent.SetDestination(walkPoint);
                 timer += Time.deltaTime;
-            }          
+            }
         }
 
-        Vector3 distanceToWlakPoint = transform.position - walkPoint;
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         if (timer >= 3)
         {
@@ -56,12 +57,15 @@ public class Enemy : MonoBehaviour
             walkPointSet = true;
         }
 
-        if (distanceToWlakPoint.magnitude < 1f && canReachWalkPoint)
+        if (distanceToWalkPoint.magnitude < 1f && canReachWalkPoint)
         {
             walkPointSet = false;
         }
     }
 
+    /// <summary>
+    /// Searches for a new random walk point within a specified range
+    /// </summary>
     private void SearchWalkPoint()
     {
         float randomX = Random.Range(-walkPointRange, walkPointRange);

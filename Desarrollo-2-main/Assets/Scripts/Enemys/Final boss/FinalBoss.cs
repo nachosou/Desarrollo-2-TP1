@@ -10,20 +10,24 @@ public class FinalBoss : Enemy
     private bool canShoot = true;
 
     public ProjectilesSO projectileSO;
+
     private ProjectilesFactory projectileFactory;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         initialPosition = transform.position;
-        projectileFactory = new ProjectilesFactory(projectileSO);    
+        projectileFactory = new ProjectilesFactory(projectileSO);
     }
 
     private void Update()
     {
-        transform.LookAt(player.transform.position);
+        transform.LookAt(player.position);
     }
 
+    /// <summary>
+    /// Teleports the boss to a random position within the specified range
+    /// </summary>
     public void TeleportRandomly()
     {
         if (canTeleport)
@@ -33,13 +37,16 @@ public class FinalBoss : Enemy
         }
     }
 
+    /// <summary>
+    /// Fires a projectile towards the player's direction
+    /// </summary>
     public void ShootProjectile()
     {
         if (canShoot)
         {
             Vector3 position = transform.position + transform.forward * 3.0f;
             Quaternion rotation = transform.rotation;
-            projectileFactory.CreateProjectile(position, rotation).SetTarget(player.transform);
+            projectileFactory.CreateProjectile(position, rotation).SetTarget(player);
         }
     }
 }

@@ -1,6 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IdleState", menuName = "FSM/States/Teleport", order = 0)]
+/// <summary>
+/// Represents the teleport state behavior of the final boss FSM
+/// </summary>
+[CreateAssetMenu(fileName = "TeleportState", menuName = "FSM/States/Teleport", order = 0)]
 public class FinalBossTeleportState : FinalBossState
 {
     public override void Enter(FinalBoss finalBoss)

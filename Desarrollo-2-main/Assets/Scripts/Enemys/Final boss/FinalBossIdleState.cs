@@ -1,10 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IdleState", menuName = "FSM/States/Idle", order = 0)] 
+/// <summary>
+/// Represents the idle state behavior of the final boss FSM
+/// </summary>
+[CreateAssetMenu(fileName = "IdleState", menuName = "FSM/States/Idle", order = 0)]
 public class IdleState : FinalBossState
 {
+    [Tooltip("Cooldown time between actions.")]
     public float actionCoolDown;
-    float timer = 0;
+
+    private float timer = 0;
 
     public override void Enter(FinalBoss finalBoss)
     {
@@ -15,11 +20,10 @@ public class IdleState : FinalBossState
     {
         timer += Time.deltaTime;
 
-        if(actionCoolDown <= timer)
+        if (timer >= actionCoolDown)
         {
             int randomIndex = Random.Range(0, states.Count);
-
-            finalBoss.GetComponent<FinalBossFSM>().ChangeState(states[randomIndex]);   
+            finalBoss.GetComponent<FinalBossFSM>().ChangeState(states[randomIndex]);
         }
     }
 }
