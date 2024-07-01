@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileBehaviour : Projectile
@@ -19,6 +18,12 @@ public class ProjectileBehaviour : Projectile
     {
         if (collision.transform == target)
         {
+            target.GetComponent<HealthSystem>().TakeDamage((int)projectileData.damage);
+            DestroyProjectile();
+        }
+        else if(collision.collider.gameObject.CompareTag("Enemy"))
+        {
+            target = collision.collider.transform;
             target.GetComponent<HealthSystem>().TakeDamage((int)projectileData.damage);
             DestroyProjectile();
         }

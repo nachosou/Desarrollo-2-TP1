@@ -1,14 +1,8 @@
-using System.Collections;
 using UnityEngine;
 
 public class FinalBoss : Enemy
 {
-    public Transform firePoint;
-    public float teleportCooldown;
     public float teleportRange;
-    public float shootingRange;
-    public float shootingCooldown;
-    public float damage;
 
     private Vector3 initialPosition;
     private Transform player;
@@ -22,8 +16,6 @@ public class FinalBoss : Enemy
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         initialPosition = transform.position;
-        StartCoroutine(TeleportRoutine());
-        StartCoroutine(ShootingCooldownRoutine());
         projectileFactory = new ProjectilesFactory(projectileSO);    
     }
 
@@ -32,7 +24,7 @@ public class FinalBoss : Enemy
         transform.LookAt(player.transform.position);
     }
 
-    private void TeleportRandomly()
+    public void TeleportRandomly()
     {
         if (canTeleport)
         {
@@ -41,31 +33,13 @@ public class FinalBoss : Enemy
         }
     }
 
-    private void ShootProjectile()
+    public void ShootProjectile()
     {
         if (canShoot)
         {
             Vector3 position = transform.position + transform.forward;
             Quaternion rotation = transform.rotation;
             projectileFactory.CreateProjectile(position, rotation).SetTarget(player.transform);
-        }
-    }
-
-    private IEnumerator TeleportRoutine()
-    {
-        while (canTeleport)
-        {
-            yield return new WaitForSeconds(teleportCooldown);
-            TeleportRandomly();
-        }
-    }
-
-    private IEnumerator ShootingCooldownRoutine()
-    {
-        while (canShoot)
-        {
-            yield return new WaitForSeconds(shootingCooldown);
-            ShootProjectile();
         }
     }
 }
