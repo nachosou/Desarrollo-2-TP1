@@ -1,8 +1,15 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HealthSystem : MonoBehaviour
 {
     public float health;
+    private LevelController levelController;
+
+    private void Start()
+    {
+        levelController = FindObjectOfType<LevelController>();
+    }
 
     public void TakeDamage(int damage)
     {
@@ -17,5 +24,6 @@ public class HealthSystem : MonoBehaviour
     protected void DestroyPlayer()
     {
         Destroy(gameObject, 0.5f);
+        levelController.EnemyDestroyed(gameObject);
     }
 }

@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private AnimationHandler animationHandler;
     public Transform orientation;
 
-    private void Start()
+    private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         SpeedControl();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (input.currentActionMap != null)
         {
@@ -163,6 +163,4 @@ public class PlayerMovement : MonoBehaviour
 
         animationHandler.SetJumpBoolAnimation(isJumping);
     }
-
-
 }

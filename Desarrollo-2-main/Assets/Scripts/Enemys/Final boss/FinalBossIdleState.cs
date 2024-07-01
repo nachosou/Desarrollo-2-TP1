@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "IdleState", menuName = "FSM/States/Idle", order = 0)] 
 public class IdleState : FinalBossState
 {
-    public float actionCoolDown = 4;
+    public float actionCoolDown;
     float timer = 0;
 
     public override void Enter(FinalBoss finalBoss)

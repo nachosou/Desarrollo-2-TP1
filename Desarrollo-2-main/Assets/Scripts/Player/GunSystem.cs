@@ -43,7 +43,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] GameObject shootPivot;
     [SerializeField] LineRenderer lineRenderer;
 
-    private void Start()
+    private void OnEnable()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
@@ -67,7 +67,7 @@ public class GunSystem : MonoBehaviour
         bulletsMagazine.text = (bulletsLeft + " / " + magazineSize);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (input.currentActionMap != null)
         {

@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
 
     public LayerMask whatIsGround;
+    
 
     public Vector3 walkPoint;
     bool walkPointSet;

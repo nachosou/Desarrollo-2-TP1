@@ -37,7 +37,7 @@ public class FinalBoss : Enemy
     {
         if (canShoot)
         {
-            Vector3 position = transform.position + transform.forward;
+            Vector3 position = transform.position + transform.forward * 3.0f;
             Quaternion rotation = transform.rotation;
             projectileFactory.CreateProjectile(position, rotation).SetTarget(player.transform);
         }

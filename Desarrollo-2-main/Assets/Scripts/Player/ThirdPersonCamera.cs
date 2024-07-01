@@ -29,7 +29,7 @@ public class ThirdPersonCamera : MonoBehaviour
         Combat
     }
 
-    private void Start()
+    private void OnEnable()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
@@ -66,7 +66,25 @@ public class ThirdPersonCamera : MonoBehaviour
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
     }
 
+    private void OnDisable()
+    {
+        if (input.currentActionMap != null)
+        {
+            input.currentActionMap.FindAction("Aim").started -= ShootingCamera_started;
+            input.currentActionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;     
+        }
+    }
+
     private void OnDestroy()
+    {
+        if (input.currentActionMap != null)
+        {
+            input.currentActionMap.FindAction("Aim").started -= ShootingCamera_started;
+            input.currentActionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;        
+        }
+    }
+
+    public void DeactivateMap()
     {
         if (input.currentActionMap != null)
         {
