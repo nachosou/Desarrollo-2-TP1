@@ -143,11 +143,13 @@ public class GunSystem : MonoBehaviour
 
         direction = pivot.forward;
 
+        GetComponent<AudioSource>().Play();
+
         if (Physics.Raycast(pivot.position, direction, out rayHit, range))
         {
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(1, rayHit.point);
-
+            
             HealthSystem health = rayHit.collider.GetComponent<HealthSystem>();
             if (health != null)
             {

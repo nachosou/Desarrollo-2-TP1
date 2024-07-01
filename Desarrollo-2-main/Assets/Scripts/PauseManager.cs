@@ -4,25 +4,20 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pausePanel;
-
+    [SerializeField] private InputActionAsset actionMap;
+    [SerializeField] private string pauseActionName = "PauseMenu";
     private bool isPauseActive = false;
-
-    private PlayerMovement player;
-
-    /// <summary>
-    /// Initializes the PauseManager and finds the PlayerMovement component
-    /// </summary>
-    private void Awake()
-    {
-        player = GetComponent<PlayerMovement>();
-    }
 
     /// <summary>
     /// Subscribes to the PauseMenu action when the object is enabled
     /// </summary>
     private void OnEnable()
     {
-        player.input.currentActionMap.FindAction("PauseMenu").started += PauseAction_started;
+        var pauseAction = actionMap.FindAction(pauseActionName);
+        if(pauseAction == null)
+            Debug.Log($"{nameof(pauseAction)} is null!");
+        else
+            pauseAction.started += PauseAction_started;
     }
 
     /// <summary>
@@ -30,7 +25,7 @@ public class PauseManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        player.input.currentActionMap.FindAction("PauseMenu").started -= PauseAction_started;
+        actionMap.FindAction(pauseActionName).started -= PauseAction_started;
     }
 
     /// <summary>

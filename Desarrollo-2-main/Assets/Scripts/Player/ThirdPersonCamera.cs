@@ -4,23 +4,24 @@ using UnityEngine.InputSystem;
 public class ThirdPersonCamera : MonoBehaviour
 {
     [Header("References")]
-    public Transform orientation;
-    public Transform player;
-    public Transform playerObj;
-    public Rigidbody rb;
+    [SerializeField] private Transform orientation;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform playerObj;
+    [SerializeField] private Rigidbody rb;
 
     public float rotationSpeed;
 
-    public Transform combatLookAt;
+    [SerializeField] private Transform combatLookAt;
     [SerializeField] GameObject crossHair;
 
-    public GameObject basicCam;
-    public GameObject shootCam;
+    [SerializeField] private GameObject basicCam;
+    [SerializeField] private GameObject shootCam;
 
     private CameraStyle currentStyle;
 
     bool isAming;
     AnimationHandler animationHandler;
+    [SerializeField] InputActionAsset actionMap;
     [SerializeField] PlayerInput input;
 
     private enum CameraStyle
@@ -37,6 +38,24 @@ public class ThirdPersonCamera : MonoBehaviour
         input.currentActionMap.FindAction("Aim").started += ShootingCamera_started;
         input.currentActionMap.FindAction("Aim").canceled += ShootingCamera_canceled;
     }
+
+    private void OnDisable()
+    {     
+        if (actionMap != null)
+        {
+            var aimAction = actionMap.FindAction("Aim");
+            if (aimAction == null)
+                Debug.LogError($"{nameof(aimAction)} is null!");
+            else
+            {
+                aimAction.started -= ShootingCamera_started;
+                aimAction.canceled -= ShootingCamera_canceled;
+            }
+        }
+        else
+            Debug.LogError($"{nameof(actionMap)} is null!");
+    }
+
 
     private void Update()
     {
@@ -66,21 +85,12 @@ public class ThirdPersonCamera : MonoBehaviour
         combatLookAt.forward = Camera.main.transform.forward - shootCam.transform.position + combatLookAt.position;
     }
 
-    private void OnDisable()
-    {
-        if (input.currentActionMap != null)
-        {
-            input.currentActionMap.FindAction("Aim").started -= ShootingCamera_started;
-            input.currentActionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;     
-        }
-    }
-
     public void DeactivateMap()
     {
-        if (input.currentActionMap != null)
+        if (actionMap != null)
         {
-            input.currentActionMap.FindAction("Aim").started -= ShootingCamera_started;
-            input.currentActionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;
+            actionMap.FindAction("Aim").started -= ShootingCamera_started;
+            actionMap.FindAction("Aim").canceled -= ShootingCamera_canceled;
         }
     }
 
