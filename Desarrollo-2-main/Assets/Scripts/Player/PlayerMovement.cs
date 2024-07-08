@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
-    public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -132,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void TryJump()
     {
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (readyToJump && grounded)
         {
             readyToJump = false;
             isJumping = true;
