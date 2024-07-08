@@ -26,7 +26,7 @@ public class GunSystem : MonoBehaviour
     public GameObject scope;
     public Transform attackPoint;
     public RaycastHit rayHit;
-    public LayerMask whatIsEnemy;
+    public LayerMask collideable;
 
     Vector3 direction;
 
@@ -145,7 +145,7 @@ public class GunSystem : MonoBehaviour
 
         GetComponent<AudioSource>().Play();
 
-        if (Physics.Raycast(pivot.position, direction, out rayHit, range))
+        if (Physics.Raycast(pivot.position, direction, out rayHit, range, collideable))
         {
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(1, rayHit.point);

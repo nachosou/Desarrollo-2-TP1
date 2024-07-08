@@ -58,9 +58,9 @@ MonoBehaviour:
   allowButtonHold: 0
   scope: {fileID: 7203019324845372824}
   attackPoint: {fileID: 6871815674332842403}
-  whatIsEnemy:
+  collideable:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
   bulletHole: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
   blood: {fileID: 1000010675638318, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c, type: 3}
   projectileSO: {fileID: 11400000, guid: d1acefd4ad3606f4786e9b49357ade59, type: 2}
@@ -248,7 +248,6 @@ MonoBehaviour:
   jumpForce: 8
   jumpCoolDown: 0.4
   airMultiplier: 0.2
-  jumpKey: 32
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -361,6 +360,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2c852dbc-6794-4177-b0a2-dff261ee022e
     m_ActionName: GamePlay/PauseMenu[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a3261170-82a4-440f-b151-04dd3b8c733a
+    m_ActionName: GamePlay/CameraLook[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamePlay

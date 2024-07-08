@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 887685018187015763}
   - component: {fileID: 5419342797738516122}
   - component: {fileID: 2038868120013172991}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lobster_01_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3577124577866045208}
   - component: {fileID: 825994363052760198}
   - component: {fileID: 4937683759225936012}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lobster_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 2545999139489315816}
   - component: {fileID: 5183145686337802851}
   - component: {fileID: 3976136683253191527}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lobster_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 3743927420423577964}
   - component: {fileID: 2829554397387310719}
   - component: {fileID: 5301675623092810477}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lobster_01_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 890924551374292022}
   - component: {fileID: 4918979615705875158}
   - component: {fileID: 1133079413280549261}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lobster_01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

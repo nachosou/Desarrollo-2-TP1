@@ -9,8 +9,6 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] private Transform playerObj;
     [SerializeField] private Rigidbody rb;
 
-    public float rotationSpeed;
-
     [SerializeField] private Transform combatLookAt;
     [SerializeField] GameObject crossHair;
 

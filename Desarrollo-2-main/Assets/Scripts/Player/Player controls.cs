@@ -116,6 +116,15 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraLook"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a3261170-82a4-440f-b151-04dd3b8c733a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -404,6 +413,28 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
                     ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16c21eec-70da-4d0e-a212-7f9012c171e6"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d74b53a7-90ff-4050-9d48-a371d17013b1"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -461,6 +492,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         m_GamePlay_GodMode = m_GamePlay.FindAction("GodMode", throwIfNotFound: true);
         m_GamePlay_NextLevel = m_GamePlay.FindAction("NextLevel", throwIfNotFound: true);
         m_GamePlay_PauseMenu = m_GamePlay.FindAction("PauseMenu", throwIfNotFound: true);
+        m_GamePlay_CameraLook = m_GamePlay.FindAction("CameraLook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -532,6 +564,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_GodMode;
     private readonly InputAction m_GamePlay_NextLevel;
     private readonly InputAction m_GamePlay_PauseMenu;
+    private readonly InputAction m_GamePlay_CameraLook;
     public struct GamePlayActions
     {
         private @Playercontrols m_Wrapper;
@@ -546,6 +579,7 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         public InputAction @GodMode => m_Wrapper.m_GamePlay_GodMode;
         public InputAction @NextLevel => m_Wrapper.m_GamePlay_NextLevel;
         public InputAction @PauseMenu => m_Wrapper.m_GamePlay_PauseMenu;
+        public InputAction @CameraLook => m_Wrapper.m_GamePlay_CameraLook;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -585,6 +619,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @CameraLook.started += instance.OnCameraLook;
+            @CameraLook.performed += instance.OnCameraLook;
+            @CameraLook.canceled += instance.OnCameraLook;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -619,6 +656,9 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @CameraLook.started -= instance.OnCameraLook;
+            @CameraLook.performed -= instance.OnCameraLook;
+            @CameraLook.canceled -= instance.OnCameraLook;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -675,5 +715,6 @@ public partial class @Playercontrols: IInputActionCollection2, IDisposable
         void OnGodMode(InputAction.CallbackContext context);
         void OnNextLevel(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnCameraLook(InputAction.CallbackContext context);
     }
 }
